@@ -1,5 +1,7 @@
 # Installation, updates and troubleshooting
 
+**First time? Start with the [illustrated install / first matte guide](QUICKSTART_EN.md).**
+
 [日本語](INSTALLATION_JA.md) · [Product guide](../README.md)
 
 v1.0.0 is published. Use only the approved package from the
@@ -36,8 +38,7 @@ failure/Cancel restores that runtime. Ordinary compatible updates still reuse it
 No additional render license is used by Source preparation.
 
 Allow 20 GB free for standard setup, or 40 GB with optional SAM 3, plus shot caches.
-The prior v0.3.062-dev installer ZIP measured 155,409,347 bytes; this is historical, **not the v1.0.0 size**.
-Check the actual v1.0.0 asset size on the Release page when published.
+The published v1.0.0 installer ZIP is 39,337,331 bytes; see the Release for its checksum.
 No universal shot cache size or VRAM requirement is claimed.
 
 ## Update

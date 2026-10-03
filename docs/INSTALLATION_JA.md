@@ -1,5 +1,7 @@
 # インストール・更新・トラブル対応
 
+**初めての方は [画像付きインストール／使用ガイド](QUICKSTART_JA.md) から始めてください。**
+
 [English](INSTALLATION.md) · [製品ガイド](../README_JA.md)
 
 v1.0.0公開版の配布先です。[配布Release](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases)
@@ -33,8 +35,7 @@ tokenはlogに残しません。WindowsのSAM 3／3.1は利用不可です。
 Source準備で追加のrender licenseは使いません。
 
 標準setupは20 GB、SAM3選択時は40 GBの空きを確認します。shot cacheには別の容量が必要です。
-旧v0.3.062-devのZIP実測は155,409,347 bytesでした。**v1.0.0のサイズではありません**。
-公開後のRelease assetで実際のサイズを確認してください。Cache容量やVRAM必要量はshotで変わります。
+公開済みv1.0.0 installer ZIPは39,337,331 bytesです。checksumはReleaseで確認できます。Cache容量やVRAM必要量はshotで変わります。
 
 ## 更新
 
