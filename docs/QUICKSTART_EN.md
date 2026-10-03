@@ -1,8 +1,11 @@
-# Install and make your first matte
+# SAM Roto: select, track and refine your matte
 
-[日本語](QUICKSTART_JA.md) · [Download v1.0.0](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.0.0)
+[日本語](QUICKSTART_JA.md)
 
-**Download → Full Setup → Open → Prepare Source → Point → Track / correct → ViTMatte → alpha / Write**
+Point-guided AI roto inside Nuke. Select each subject with points, track across the shot,
+compare optional ViTMatte edge refinement, then use the matte in Nuke.
+
+**Full Setup → Prepare Source → Select → Track / correct → ViTMatte OFF / ON → Cutout → alpha / Write**
 
 Windows / Linux x86_64 and an **NVIDIA CUDA-capable GPU** are required. Nuke 15.2 / 16.0 / 16.1 / 17.x
 are compatibility targets; validation is not complete for every OS/Nuke/GPU combination.
@@ -43,58 +46,63 @@ For tracking, prepare the required range; **Current Frame** prepares only one fr
 **Next to Nuke Script** needs a saved .nk. **Custom Folder** lets you choose a writable folder.
 To change these later, use **Cache / Setup**; keep cache folders accessible for the shot.
 
-## 3. Add guidance points
+## 3. Select — guide each object
 
-Use the default **SAM 2.1** model. Choose an Object, select **Add Point**, then click inside the subject.
-**Remove Point** adds background/exclusion guidance; it does not delete an existing point.
-Use **Undo Point** to undo a point edit. Create another Object for a separate matte.
+Use **SAM 2.1**, choose an Object and click inside the subject with **Add Point**.
+Create a second Object for a separate matte. The colored overlay helps distinguish the two subjects.
+**Remove Point** adds background/exclusion guidance; it does not delete a point. Use **Undo Point** to undo an edit.
 
-*Editor images below are actual Windows window captures from a **private 1.0.1 update-test fixture**,
-displaying saved synthetic source/matte pixels. They illustrate control locations, are not formal
-v1.0.0 screenshots, and do not demonstrate a new inference, Track, Write or quality comparison.*
+![Select — frame 1: Add Point guidance for two objects, shown in red/yellow overlay.](images/select_1.png)
 
-![Point controls and saved synthetic matte — private 1.0.1 fixture](images/point.png)
+*Select — frame 1: Add Point guidance for two objects, shown in red/yellow overlay.*
 
-*Point controls with a saved synthetic matte — private 1.0.1 fixture.*
+## 4. Track — follow the shot and correct
 
-## 4. Track, inspect and correct
+Set the range / In–Out and click **Track** for unfinished frames. Scrub to check the result.
+At a difficult frame add correction points, set the affected In–Out and use **Update Track** to recompute existing results.
+**Stop** keeps completed frames. Objects without guidance are skipped; the arrow buttons start directional tracking directly.
 
-Set the tracking range / In–Out, then click **Track** to fill unfinished frames.
-Scrub the result. At a difficult frame add foreground/background correction points, set In–Out for the
-affected range, and click **Update Track** to recompute existing results. **Track** continues unfinished frames.
-**Stop** ends the active run and keeps completed frames. Objects without guidance are skipped.
-The arrow buttons below Track start directional tracking directly.
+![Track — frame 24: two object overlays; Status shows 24 frames completed.](images/track_2.png)
 
-![Timeline at frame 5 with saved matte — private 1.0.1 fixture](images/track.png)
+*Track — frame 24: two object overlays; Status shows 24 frames completed.*
 
-*Frame 5 / timeline display of saved data — private 1.0.1 fixture; no new tracking was run for this capture.*
+## 5. ViTMatte OFF / ON — compare the edges
 
-## 5. Adjust the matte and optionally use ViTMatte
+Select **Matte** in View. Toggle **ViTMatte** while inspecting the same frame to compare the contour.
+ViTMatte is optional edge refinement, not a tracking model, and uses additional GPU resources.
+Its model is prepared by standard Full Setup. Check the result on your own shot.
 
-Open **Adjustment** for Global Adjustment: Fill Holes, Remove Specks, Grow / Shrink, Feather and Close Gaps.
-Global controls also appear in Node Properties and share the same state. Use **Object Override** only
-when one object needs different settings.
+| ViTMatte OFF · frame 24 | ViTMatte ON · frame 24 |
+| --- | --- |
+| <img src="images/vitmatte_off_3.png" alt="ViTMatte OFF — frame 24, Matte View." width="460"> | <img src="images/vitmatte_on_3.png" alt="ViTMatte ON — frame 24, Matte View; compare the displayed edges with OFF." width="460"> |
 
-Enable **ViTMatte** for optional edge refinement and inspect the current frame. It uses additional GPU
-resources and refines the matte; it is not a tracking model. Its model is included in standard Full Setup.
+*Same displayed frame in Matte View: compare the edges. This example is not a guarantee for every shot.*
 
-![ViTMatte controls with saved result — private 1.0.1 fixture](images/vitmatte.png)
+For small matte changes use **Adjustment**: Fill Holes, Remove Specks, Grow / Shrink, Feather and Close Gaps.
+Global controls in Node Properties and the Editor share the same state. **Object Override** changes only the chosen object.
 
-*ViTMatte controls and a saved matte — private 1.0.1 fixture; not an OFF/ON comparison.*
+## 6. Cutout — inspect the current-frame result
 
-## 6. Use alpha and render with Write
+Choose **Cutout** in View to see the subjects against black using the current matte.
+This preview is useful before output; it does not mean every frame is ready for rendering.
+
+![Cutout — frame 24 current-frame preview. Final mattes are paused at 9/24; this is not a completed Write.](images/complete_4.png)
+
+*Cutout — frame 24 current-frame preview. Final mattes are paused at 9/24; this is not a completed Write.*
+
+User-provided operation examples captured in a development checkout displaying v1.0.0 (build 2f574ca). These are not native acceptance evidence for the published ZIP (a2545b9). The Cutout shows the current frame, not all Final Mattes or a completed Write.
+
+## 7. Use alpha and render with Write
 
 Connect the SAM Roto Group to a Nuke Viewer and inspect **rgba.alpha** with **A**.
 RGB stays the Source; alpha combines enabled objects. For a separate object output use
 **Node Properties → Output → Object Matte → Create Object Matte**.
 
-Connect a **Write** and render normally in the Nuke GUI. Required Final Mattes prepare with progress,
+Connect **Write** and render in the Nuke GUI. Required Final Mattes prepare with progress,
 then the original Render continues automatically. Cancel also cancels the waiting render.
-**Output Options → Precompute Final Mattes** is optional; it is not a routine prerequisite.
+**Output Options → Precompute Final Mattes** is optional, not a routine prerequisite.
 
-![Matte view and Output Options — private 1.0.1 fixture](images/alpha.png)
-
-*Saved matte view and Output Options — private 1.0.1 fixture; not a new Nuke alpha/Write validation.*
+**[Download v1.0.0](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.0/SAM-Roto-for-Nuke-v1.0.0.zip)** · [日本語ガイド](QUICKSTART_JA.md)
 
 ## Update, recover and get help
 

@@ -1,26 +1,59 @@
 # SAM Roto for Nuke v1.0.0
 
-Point-guided AI roto inside Nuke: create multiple object mattes, track and correct them,
-refine edges with Adjustment / optional ViTMatte, then use Nuke alpha and Write.
+Point-guided AI roto inside Nuke. Select multiple subjects, track and correct their mattes,
+refine edges with optional ViTMatte, then use Nuke alpha and Write.
 
-**[Download v1.0.0](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.0/SAM-Roto-for-Nuke-v1.0.0.zip)** · **[Install / first matte guide](docs/QUICKSTART_EN.md)** ·
+## Start in a few steps
+
+Download and extract the ZIP → save work and close Nuke/backend → **install_windows.bat / install_linux.sh**
+→ **Install SAM Roto → automatic Full Setup → Finish** → restart Nuke.
+Select a Source → **SAM Roto → Open SAM Roto → Prepare Source**.
+Start with **Full Range / Local Cache / Auto**. No system Python, Git or startup editing.
+
+## Select
+
+Choose an Object, add foreground points with **Add Point**, then create another Object for a separate subject.
+
+![Select — frame 1: Add Point guidance for two objects, shown in red/yellow overlay.](docs/images/select_1.png)
+
+*Select — frame 1: Add Point guidance for two objects, shown in red/yellow overlay.*
+
+## Track
+
+**Track** unfinished frames. Scrub, add correction points and use **Update Track** for existing results.
+
+![Track — frame 24: two object overlays; Status shows 24 frames completed.](docs/images/track_2.png)
+
+*Track — frame 24: two object overlays; Status shows 24 frames completed.*
+
+## ViTMatte OFF / ON
+
+Inspect the same frame in **Matte View** and toggle optional **ViTMatte** to compare edge refinement.
+
+| ViTMatte OFF · frame 24 | ViTMatte ON · frame 24 |
+| --- | --- |
+| <img src="docs/images/vitmatte_off_3.png" alt="ViTMatte OFF — frame 24, Matte View." width="460"> | <img src="docs/images/vitmatte_on_3.png" alt="ViTMatte ON — frame 24, Matte View; compare the displayed edges with OFF." width="460"> |
+
+*Same displayed frame in Matte View: compare the edges. This example is not a guarantee for every shot.*
+
+## Cutout / output
+
+Use **Cutout View** to inspect the current-frame matte. In Nuke, inspect **rgba.alpha**, connect **Write**
+and render; required Final Mattes prepare before the GUI Render continues automatically.
+
+![Cutout — frame 24 current-frame preview. Final mattes are paused at 9/24; this is not a completed Write.](docs/images/complete_4.png)
+
+*Cutout — frame 24 current-frame preview. Final mattes are paused at 9/24; this is not a completed Write.*
+
+User-provided operation examples captured in a development checkout displaying v1.0.0 (build 2f574ca). These are not native acceptance evidence for the published ZIP (a2545b9). The Cutout shows the current frame, not all Final Mattes or a completed Write.
+
+## Download / guides
+
+**[Download v1.0.0](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.0/SAM-Roto-for-Nuke-v1.0.0.zip)** · **[English install / usage guide](docs/QUICKSTART_EN.md)** ·
 **[日本語ガイド](docs/QUICKSTART_JA.md)**
 
-## Start here
-
-1. Download and extract the ZIP.
-2. Save work and close Nuke/backend; run **install_windows.bat** or **install_linux.sh**.
-3. **Install SAM Roto → Full Setup → Finish**. Restart Nuke.
-4. Select a source → **SAM Roto → Open SAM Roto → Prepare Source**.
-5. **Add Point → Track → correct with points / Update Track**.
-6. Optional **ViTMatte** → inspect **rgba.alpha** → connect **Write** and render.
-
-No system Python, Git or startup editing. Standard Full Setup prepares SAM 2/2.1 Base+ and ViTMatte models;
-they run locally afterward. Updates preserve compatible runtime/models and artist data.
-
-![Actual v1.0.0 Full Setup completion](docs/images/finish-v1.0.0.png)
-
-*Windows v1.0.0 installer: Finish, then restart Nuke.*
+Full Setup prepares Python/PyTorch, SAM 2/2.1 Base+ and ViTMatte models; they run locally afterward.
+Compatible updates preserve runtime/models and artist data. The guide includes the actual v1.0.0 Install / Finish screens.
 
 ## Requirements / limitations
 
@@ -43,8 +76,7 @@ Development checkouts keep **DEV Sync + Reload**; do not install over your norma
 [Detailed installation / recovery](docs/INSTALLATION.md) · [Release notes](docs/RELEASE_NOTES_1.0.0_EN.md) ·
 [Image URLs / captions](docs/SCREENSHOTS.md)
 
-Installer images show v1.0.0. Editor images in the guide show a **private 1.0.1 update-test fixture**
-displaying saved synthetic mattes; they are not formal v1.0.0 screenshots or new inference/Write evidence.
+The guides also retain actual v1.0.0 installer captures.
 
 ## Integrity / licenses
 

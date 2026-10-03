@@ -1,8 +1,10 @@
-# インストールから最初のMatteまで
+# SAM Roto：SelectからTrack、Matte調整まで
 
-[English](QUICKSTART_EN.md) · [v1.0.0ダウンロード](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.0.0)
+[English](QUICKSTART_EN.md)
 
-**ダウンロード → Full Setup → 起動 → Source準備 → Point → Track／修正 → ViTMatte → alpha／Write**
+Nuke内でPointから対象を指定し、shotをTrack。任意のViTMatteで輪郭を比較・調整し、MatteをNukeへ出力します。
+
+**Full Setup → Source準備 → Select → Track／修正 → ViTMatte OFF／ON → Cutout → alpha／Write**
 
 Windows／Linux x86_64と **NVIDIA CUDA GPU** が必要です。Nuke 15.2／16.0／16.1／17.xが互換対象です。
 全OS／Nuke／GPUの組み合わせで検証完了しているわけではありません。
@@ -43,60 +45,63 @@ Trackでは必要rangeを準備してください。**Current Frame** は1frame�
 **Next to Nuke Script** は.nk保存後に選択可能。任意の書き込み可能folderは **Custom Folder** で選びます。
 あとから変更する場合は **Cache / Setup** を使い、shotのCache folderを参照できる状態に保ってください。
 
-## 3. Pointを追加
+## 3. Select — 対象をPointで指定
 
-標準の **SAM 2.1** を選びます。Objectを選択し、**Add Point** で対象の内側をクリック。
-**Remove Point** は背景／除外側のguidanceを追加する操作で、既存Pointの削除ではありません。
-Point操作を戻すときは **Undo Point**。別Matteにしたい対象は別Objectを作ります。
+**SAM 2.1** を選び、Objectごとに **Add Point** で対象の内側をクリックします。
+別Matteにしたい対象は別Objectにします。色付きoverlayで2対象を見分けられます。
+**Remove Point** は背景／除外のguidanceを追加する操作です。Point編集を戻す場合は **Undo Point**。
 
-*以下のEditor画像は、**private 1.0.1更新テストfixture** の実際のWindowsウィンドウです。
-保存済みsynthetic Source／Matteを表示した操作位置の参考で、正式v1.0.0のスクショではありません。
-撮影時に新たな推論／Track／Writeは行っておらず、品質比較の画像でもありません。*
+![Select — frame 1。Add Pointで2対象を指定し、赤／黄のoverlayで確認。](images/select_1.png)
 
-![Point操作と保存済みsynthetic Matte：private 1.0.1 fixture](images/point.png)
+*Select — frame 1。Add Pointで2対象を指定し、赤／黄のoverlayで確認。*
 
-*Point操作と保存済みsynthetic Matte。private 1.0.1 fixture。*
+## 4. Track — shotを追い、必要なframeを修正
 
-## 4. Trackと修正
+range／In–Outを設定し、**Track** で未完了frameを進めます。scrubして結果を確認します。
+難しいframeへ修正Pointを追加し、対象In–Outを設定して **Update Track** で既存結果を再計算します。
+**Stop** は完成frameを保持。guidanceのないObjectはskipします。矢印buttonは方向を限定して直接Trackを開始します。
 
-tracking range／In–Outを設定し、**Track** で未完了frameを進めます。
-結果をscrubして確認し、難しいframeへforeground／backgroundの修正Pointを追加。
-修正したいIn–Outを設定して **Update Track** で既存結果を再計算します。
-**Track** は未完了frameの続行、**Stop** は実行中の処理を停止して完成frameを保持します。
-guidanceのないObjectはskipし、他ObjectのTrackは進めます。
-方向を限定する場合はTrack直下の矢印buttonから直接実行します。
+![Track — frame 24。2対象のoverlayと、Statusの24 frames completed表示。](images/track_2.png)
 
-![frame 5の保存済みMatteとtimeline：private 1.0.1 fixture](images/track.png)
+*Track — frame 24。2対象のoverlayと、Statusの24 frames completed表示。*
 
-*frame 5とtimelineの保存済みデータ表示。private 1.0.1 fixture。撮影時の新規Trackではありません。*
+## 5. ViTMatte OFF／ON — 輪郭を比較
 
-## 5. Adjustmentと任意のViTMatte
+Viewを **Matte** にし、同じframeで **ViTMatte** をOFF／ONして輪郭を確認します。
+ViTMatteは任意のedge調整で、Tracking modelではありません。追加GPU負荷があります。
+モデルは標準Full Setupで準備します。自分のshotでも結果を確認してください。
 
-**Adjustment** でFill Holes／Remove Specks／Grow / Shrink／Feather／Close Gapsを調整します。
-Global AdjustmentはNode Propertiesにもあり、同じStateを共有します。
-Object別に変えたい場合だけ **Object Override** を使います。
+| ViTMatte OFF · frame 24 | ViTMatte ON · frame 24 |
+| --- | --- |
+| <img src="images/vitmatte_off_3.png" alt="ViTMatte OFF — frame 24, Matte View." width="460"> | <img src="images/vitmatte_on_3.png" alt="ViTMatte ON — frame 24, Matte View; compare the displayed edges with OFF." width="460"> |
 
-必要なら **ViTMatte** を有効にしてcurrent frameのedgeを確認します。
-Matteを調整する機能で、tracking modelではありません。追加GPU負荷があります。
-モデルは標準Full Setupで準備済みです。
+*同じframeのMatte Viewで輪郭を比較できます。すべてのshotで同じ効果を保証するものではありません。*
 
-![ViTMatte操作と保存済みMatte：private 1.0.1 fixture](images/vitmatte.png)
+軽い調整は **Adjustment** のFill Holes／Remove Specks／Grow / Shrink／Feather／Close Gaps。
+Node PropertiesとEditorのGlobal Adjustmentは同じStateを共有します。対象別の変更だけ **Object Override** を使います。
 
-*ViTMatte操作と保存済みMatte。private 1.0.1 fixture。OFF／ON比較ではありません。*
+## 6. Cutout — current frameの切り抜きを確認
 
-## 6. alphaとWrite
+Viewを **Cutout** にすると、現在のMatteで切り抜いた対象を黒背景で確認できます。
+出力前の確認用previewであり、全frameがRender準備完了という意味ではありません。
+
+![Cutout — frame 24のcurrent-frame preview。Final mattesは9/24でpaused。Write完了画像ではありません。](images/complete_4.png)
+
+*Cutout — frame 24のcurrent-frame preview。Final mattesは9/24でpaused。Write完了画像ではありません。*
+
+操作画像は、v1.0.0表示の開発checkout（build 2f574ca）で撮影したユーザー提供例です。公開ZIP（a2545b9）のnative acceptance証拠ではありません。Cutoutはcurrent frameのpreviewで、全Final MatteやWriteの完了を示しません。
+
+## 7. alphaとWriteへ
 
 SAM Roto GroupをNuke Viewerにつなぎ、**A** で **rgba.alpha** を確認します。
 RGBはSourceを保持し、alphaは有効Objectを合成します。Object別出力は
 **Node Properties → Output → Object Matte → Create Object Matte**。
 
-**Write** を接続し、Nuke GUIから通常どおりRenderします。必要なFinal Matteはprogressを表示して準備し、
+**Write** を接続してNuke GUIでRenderします。必要なFinal Matteはprogressを表示して準備し、
 完了後は元のRenderを自動続行します。Cancelは待機中のRenderも中止します。
-**Output Options → Precompute Final Mattes** は任意の事前準備で、通常の必須操作ではありません。
+**Output Options → Precompute Final Mattes** は任意の事前準備です。
 
-![保存済みMatte ViewとOutput Options：private 1.0.1 fixture](images/alpha.png)
-
-*保存済みMatte ViewとOutput Options。private 1.0.1 fixture。新たなNuke alpha／Write検証ではありません。*
+**[v1.0.0ダウンロード](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.0/SAM-Roto-for-Nuke-v1.0.0.zip)** · [English guide](QUICKSTART_EN.md)
 
 ## 更新・復旧・問い合わせ
 

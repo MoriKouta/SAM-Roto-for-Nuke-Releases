@@ -1,26 +1,59 @@
 # SAM Roto for Nuke v1.0.0
 
-Nuke内のポイント指定AIロト。ObjectごとのMatteをTrack／修正し、Adjustment／任意のViTMatteで
-edgeを調整して、そのままNuke alpha／Writeへ出力します。
+Nuke内で使うPoint指定のAIロト。複数対象を指定してTrack／修正し、任意のViTMatteで輪郭を調整。
+MatteをそのままNuke alpha／Writeへ出力します。
 
-**[v1.0.0ダウンロード](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.0/SAM-Roto-for-Nuke-v1.0.0.zip)** · **[インストール／使用ガイド](docs/QUICKSTART_JA.md)** ·
+## 短い導入
+
+ZIPを取得・展開 → 作業保存・Nuke／backend終了 → **install_windows.bat／install_linux.sh**
+→ **Install SAM Roto → 自動Full Setup → Finish** → Nuke再起動。
+Source選択 → **SAM Roto → Open SAM Roto → Prepare Source**。
+最初は **Full Range／Local Cache／Auto**。system Python／Git／startup編集は不要です。
+
+## Select
+
+Objectを選び、**Add Point** で対象を指定。別対象には別Objectを作ります。
+
+![Select — frame 1。Add Pointで2対象を指定し、赤／黄のoverlayで確認。](docs/images/select_1.png)
+
+*Select — frame 1。Add Pointで2対象を指定し、赤／黄のoverlayで確認。*
+
+## Track
+
+**Track** で未完了frameを進めます。scrubして修正Pointを追加し、**Update Track** で既存結果を再計算。
+
+![Track — frame 24。2対象のoverlayと、Statusの24 frames completed表示。](docs/images/track_2.png)
+
+*Track — frame 24。2対象のoverlayと、Statusの24 frames completed表示。*
+
+## ViTMatte OFF／ON
+
+同じframeの **Matte View** で任意の **ViTMatte** を切り替え、輪郭を比較します。
+
+| ViTMatte OFF · frame 24 | ViTMatte ON · frame 24 |
+| --- | --- |
+| <img src="docs/images/vitmatte_off_3.png" alt="ViTMatte OFF — frame 24, Matte View." width="460"> | <img src="docs/images/vitmatte_on_3.png" alt="ViTMatte ON — frame 24, Matte View; compare the displayed edges with OFF." width="460"> |
+
+*同じframeのMatte Viewで輪郭を比較できます。すべてのshotで同じ効果を保証するものではありません。*
+
+## Cutout／出力
+
+**Cutout View** でcurrent frameの切り抜きを確認。Nukeの **rgba.alpha** を確認して **Write** を接続します。
+GUI Render時は必要なFinal Matteを準備してから元のRenderを自動続行します。
+
+![Cutout — frame 24のcurrent-frame preview。Final mattesは9/24でpaused。Write完了画像ではありません。](docs/images/complete_4.png)
+
+*Cutout — frame 24のcurrent-frame preview。Final mattesは9/24でpaused。Write完了画像ではありません。*
+
+操作画像は、v1.0.0表示の開発checkout（build 2f574ca）で撮影したユーザー提供例です。公開ZIP（a2545b9）のnative acceptance証拠ではありません。Cutoutはcurrent frameのpreviewで、全Final MatteやWriteの完了を示しません。
+
+## ダウンロード／ガイド
+
+**[v1.0.0ダウンロード](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.0/SAM-Roto-for-Nuke-v1.0.0.zip)** · **[日本語インストール／使用ガイド](docs/QUICKSTART_JA.md)** ·
 **[English guide](docs/QUICKSTART_EN.md)**
 
-## 最初の手順
-
-1. ZIPを取得して展開。
-2. 作業を保存してNuke／backendを終了。**install_windows.bat／install_linux.sh** を実行。
-3. **Install SAM Roto → Full Setup → Finish**。Nuke再起動。
-4. Source選択 → **SAM Roto → Open SAM Roto → Prepare Source**。
-5. **Add Point → Track → 修正Point／Update Track**。
-6. 任意の **ViTMatte** → **rgba.alpha** を確認 → **Write** を接続してRender。
-
-system Python／Git／startup編集は不要です。標準Full SetupでSAM2／2.1 Base+とViTMatteのモデルを準備し、
-以後はlocalで使います。更新は互換runtime／モデルとArtistデータを保持します。
-
-![v1.0.0 Full Setup完了の実際の画面](docs/images/finish-v1.0.0.png)
-
-*Windows v1.0.0 installer：Finish後にNukeを再起動。*
+Full SetupでPython／PyTorch、SAM2／2.1 Base+とViTMatteのモデルを準備し、以後はlocalで使います。
+更新は互換runtime／モデルとArtistデータを保持。ガイドには実v1.0.0のInstall／Finish画面も掲載しています。
 
 ## 必要条件・制限
 
@@ -43,8 +76,7 @@ CUDA unknown errorの物理原因は未特定です。添付前に画像／log�
 [詳細install／復旧](docs/INSTALLATION_JA.md) · [Release notes](docs/RELEASE_NOTES_1.0.0_JA.md) ·
 [画像URL／キャプション](docs/SCREENSHOTS.md)
 
-installer画像はv1.0.0です。ガイドのEditor画像は **private 1.0.1更新テストfixture** で保存済みsynthetic
-Matteを表示したものです。正式v1.0.0の画面や撮影時の新規推論／Write検証とは扱いません。
+ガイドには実際のv1.0.0 installer画面も保持しています。
 
 ## 整合性・ライセンス
 
