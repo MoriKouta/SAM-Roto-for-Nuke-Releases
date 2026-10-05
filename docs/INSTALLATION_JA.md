@@ -4,7 +4,7 @@
 
 [English](INSTALLATION.md) · [製品ガイド](../README_JA.md)
 
-v1.0.0公開版の配布先です。[配布Release](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases)
+v1.0.3公開版の配布先です。[配布Release](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases)
 で承認・公開されたpackageを使ってください。GitHubのsource ZIPはインストーラではありません。
 
 ## インストール
@@ -20,7 +20,8 @@ system Python／Git、startupの手編集、環境変数設定は不要です。
 
 配置先はHOME/.nuke/SAMRotoです。WindowsでHOMEがなければUSERPROFILEを使います。
 画面に表示された実際の配置先を確認してください。NUKE_PATHでは配置先を変更しません。
-symlink／reparse先は拒否します。UNC・network homeの権限はstudioで実機確認してください。
+install target・startup file・管理対象データ自体のsymlink／reparseは拒否します。
+LinuxのHOME親aliasはユーザー所有の安全な実体pathへ正規化します。path escapeは許可しません。UNC・network homeの権限はstudioで実機確認してください。
 
 uvとSAM sourceは同梱・offline検証します。Python 3.12.14、torch 2.10.0+cu128、
 torchvision 0.25.0+cu128などの固定packageはOS証明書を使って取得します。
@@ -31,11 +32,11 @@ SAM 2／2.1 Base+と固定revisionのViTMatteもinstaller内で取得します�
 tokenはlogに残しません。WindowsのSAM 3／3.1は利用不可です。
 あとからoptional runtimeを追加する場合は、既存venvを直接変更せずbackup付きで構築し、失敗・Cancel時は復元します。
 通常の互換code updateではruntimeを再構築しません。
-**Windows / Linux x86_64: Supported。macOS: Not supported in v1.0.0。**
+**Windows / Linux x86_64: Supported。macOS: Not supported in v1.0.3。**
 Source準備で追加のrender licenseは使いません。
 
 標準setupは20 GB、SAM3選択時は40 GBの空きを確認します。shot cacheには別の容量が必要です。
-公開済みv1.0.0 installer ZIPは39,337,331 bytesです。checksumはReleaseで確認できます。Cache容量やVRAM必要量はshotで変わります。
+現在のinstaller ZIPとchecksumは[最新Release](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/latest)で確認できます。Cache容量やVRAM必要量はshotで変わります。
 
 ## 更新
 
@@ -119,4 +120,4 @@ Cancelはinstaller-owned subprocess停止とrollback完了を待ちます。不�
 5. Global Adjustment／Object Override、任意のViTMatte、combined／object alpha、Write自動準備とCancel。
 6. .nkのSave/Open、Editor復元、旧installから更新しCache／state／モデル保持を確認。
 
-自動test・過去の開発版記録は今回のv1.0.0実機受入の代わりにはなりません。
+自動test・過去の開発版記録は今回のv1.0.3実機受入の代わりにはなりません。

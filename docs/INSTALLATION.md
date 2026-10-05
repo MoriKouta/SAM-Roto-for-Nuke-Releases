@@ -4,7 +4,7 @@
 
 [日本語](INSTALLATION_JA.md) · [Product guide](../README.md)
 
-v1.0.0 is published. Use only the approved package from the
+v1.0.3 is published. Use only the approved package from the
 [distribution Releases](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases).
 A repository source ZIP is not an installer.
 
@@ -22,7 +22,8 @@ No system Python/Git, startup edits or environment setup are required.
 
 The destination is HOME/.nuke/SAMRoto (Windows: USERPROFILE when HOME is absent).
 The displayed install path is authoritative; NUKE_PATH does not change it.
-Linked/reparse installation paths are refused. Network home/UNC permissions require studio validation.
+The installation target, startup files and managed data must not be links/reparse points.
+Linux parent HOME aliases are normalized to an owned, safe real directory; path escape is refused. Network home/UNC permissions require studio validation.
 
 Packaged uv and SAM sources are verified offline. Python 3.12.14, torch 2.10.0+cu128,
 torchvision 0.25.0+cu128 and other locked packages download during installation using system trust.
@@ -34,11 +35,11 @@ SAM 3 is excluded from standard setup. Linux **Advanced** can prepare experiment
 with explicitly entered, approved HF access; Windows entries are unavailable. Tokens are never logged.
 Adding this optional runtime later uses a journaled rebuild rather than changing a working venv in place;
 failure/Cancel restores that runtime. Ordinary compatible updates still reuse it without rebuilding.
-**Windows / Linux x86_64: Supported. macOS: Not supported in v1.0.0.**
+**Windows / Linux x86_64: Supported. macOS: Not supported in v1.0.3.**
 No additional render license is used by Source preparation.
 
 Allow 20 GB free for standard setup, or 40 GB with optional SAM 3, plus shot caches.
-The published v1.0.0 installer ZIP is 39,337,331 bytes; see the Release for its checksum.
+See the [latest Release](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/latest) for the current installer ZIP and checksum.
 No universal shot cache size or VRAM requirement is claimed.
 
 ## Update
@@ -128,6 +129,6 @@ Repeat on each available **Nuke 15.2, 16.0, 16.1 and 17.x**, Windows and Linux:
    one-click Write and Cancel. Confirm no model download/setup prompt and correct alpha.
 6. Save/Open .nk; reopen/minimize/maximize; update a previous install and confirm cache/state/model reuse.
 
-Automated tests and historical development runs do not replace this v1.0.0 checklist.
+Automated tests and historical development runs do not replace this v1.0.3 checklist.
 Repeat installer Cancel/Retry and a compatible application update; verify no healthy runtime/models
 are downloaded again. Linux optional SAM 3/3.1 requires separate gated-access/native acceptance.

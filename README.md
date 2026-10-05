@@ -1,4 +1,4 @@
-# SAM Roto for Nuke v1.0.1
+# SAM Roto for Nuke v1.0.3
 
 Point-guided AI roto inside Nuke. Select multiple subjects, track and correct their mattes,
 refine edges with optional ViTMatte, then use Nuke alpha and Write.
@@ -55,8 +55,11 @@ User-provided operation examples captured in a development checkout displaying v
 **[Latest release / download](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/latest)** · **[English install / usage guide](docs/QUICKSTART_EN.md)** ·
 **[日本語ガイド](docs/QUICKSTART_JA.md)**
 
-Download the versioned ZIP from the latest Release assets. Current published version: **[v1.0.1 ZIP](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.1/SAM-Roto-for-Nuke-v1.0.1.zip)**.
-Native Full Fresh Install, Tab/Properties, installer progress UI and GPU acceptance remain unverified for v1.0.1.
+Download the versioned ZIP from the latest Release assets. Current published version: **[v1.0.3 ZIP](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.3/SAM-Roto-for-Nuke-v1.0.3.zip)**.
+v1.0.3 fixes SAM Roto callbacks that stalled unrelated comp edits in large scripts.
+Actual Source edits still invalidate affected output; Write revalidates Source before rendering.
+The v1.0.2 candidate's Linux installer/legacy Repair fixes are included. Native GUI/GPU,
+large-comp responsiveness, Linux Fresh Install and legacy Repair remain unverified for this build.
 
 Full Setup prepares Python/PyTorch, SAM 2/2.1 Base+ and ViTMatte models; they run locally afterward.
 Compatible updates preserve runtime/models and artist data. The guide includes the actual v1.0.0 Install / Finish screens.
@@ -66,7 +69,7 @@ Compatible updates preserve runtime/models and artist data. The guide includes t
 - **Windows / Linux x86_64 · NVIDIA CUDA-capable GPU required.** Internet for install/repair.
 - Allow 20 GB free during standard setup, plus shot caches; GPU memory needs depend on the shot.
 - Nuke 15.2 / 16.0 / 16.1 / 17.x are compatibility targets. Validation is not complete for every OS/Nuke/GPU combination.
-- macOS, CPU-only / AMD-only / Intel-only inference are unsupported in v1.0.1.
+- macOS, CPU-only / AMD-only / Intel-only inference are unsupported in v1.0.3.
 - Windows SAM3/3.1 is unavailable; Linux is experimental and needs installer Advanced + approved HF access.
 - Farm/terminal renders require prepared caches/runtime or baked standard nodes. No automatic farm inference.
 - Get Color and Ctrl+Shift+C custom hotkey are not included.
@@ -79,16 +82,15 @@ Development checkouts keep **DEV Sync + Reload**; do not install over your norma
 ## Guides / screenshots
 
 [English](docs/QUICKSTART_EN.md) · [日本語](docs/QUICKSTART_JA.md) ·
-[Detailed installation / recovery](docs/INSTALLATION.md) · [v1.0.1 release notes](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.0.1) ·
+[Detailed installation / recovery](docs/INSTALLATION.md) · [v1.0.3 release notes](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.0.3) ·
 [Image URLs / captions](docs/SCREENSHOTS.md)
 
 The guides also retain actual v1.0.0 installer captures.
 
 ## Integrity / licenses
 
-ZIP SHA-256: `6768e3f7ccb3e3b8d495bea66699719ade40c25f9532fd5d75a3833fe6fef2a1`.
-Application source: `37e79965aa514d6be9ad06a8ee2cc13f3b82972f` · 39,352,403 bytes (v1.0.1 ZIP).
+ZIP SHA-256: `9c5e63b0a7c21fd41e1d218390ae352caa5d466c3f4d257a9b9568f440e60912`.
+Application source: `240df8b4e15054e7e1d0045a508e4f8f93da10db` · 39,367,328 bytes (v1.0.3 ZIP).
 Manual checksum comparison is optional; internal application/uv/source checks remain mandatory.
-Some embedded ZIP docs retain preparation-stage candidate wording; the [published v1.0.1 Release](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.0.1) and checksum identify the artifact.
 Original SAM Roto code is MIT; third-party components retain their own terms.
 [LICENSE](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md) · [Pinned inventory](docs/THIRD_PARTY_INVENTORY.md).

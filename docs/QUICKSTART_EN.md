@@ -1,5 +1,7 @@
 # SAM Roto: select, track and refine your matte
 
+Current release: **v1.0.3**. [Changes / validation limits](RELEASE_NOTES_1.0.3_EN.md).
+
 [日本語](QUICKSTART_JA.md)
 
 Point-guided AI roto inside Nuke. Select each subject with points, track across the shot,
@@ -9,12 +11,12 @@ compare optional ViTMatte edge refinement, then use the matte in Nuke.
 
 Windows / Linux x86_64 and an **NVIDIA CUDA-capable GPU** are required. Nuke 15.2 / 16.0 / 16.1 / 17.x
 are compatibility targets; validation is not complete for every OS/Nuke/GPU combination.
-macOS and CPU-only / AMD-only / Intel-only inference are not supported in v1.0.0.
+macOS and CPU-only / AMD-only / Intel-only inference are not supported in v1.0.3.
 Internet is needed for installation/repair. Allow 20 GB free for standard setup, plus shot caches.
 
 ## 1. Download and run Full Setup
 
-1. Download **[SAM-Roto-for-Nuke-v1.0.0.zip](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.0/SAM-Roto-for-Nuke-v1.0.0.zip)** and extract it.
+1. Download **[SAM-Roto-for-Nuke-v1.0.3.zip](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.3/SAM-Roto-for-Nuke-v1.0.3.zip)** and extract it.
 2. Save your work, close Nuke and stop the SAM Roto backend before installing. Open the extracted folder.
 3. Windows: run **install_windows.bat**. Linux: run **install_linux.sh**.
 4. Click **Install SAM Roto**. Wait for **SAM Roto is ready**, then click **Finish**.
@@ -90,7 +92,7 @@ This preview is useful before output; it does not mean every frame is ready for 
 
 *Cutout — frame 24 current-frame preview. Final mattes are paused at 9/24; this is not a completed Write.*
 
-User-provided operation examples captured in a development checkout displaying v1.0.0 (build 2f574ca). These are not native acceptance evidence for the published ZIP (a2545b9). The Cutout shows the current frame, not all Final Mattes or a completed Write.
+User-provided operation examples captured in a development checkout displaying v1.0.0 (build 2f574ca). These are not native acceptance evidence for the published v1.0.0 ZIP (a2545b9) or v1.0.3. The Cutout shows the current frame, not all Final Mattes or a completed Write.
 
 ## 7. Use alpha and render with Write
 
@@ -102,7 +104,7 @@ Connect **Write** and render in the Nuke GUI. Required Final Mattes prepare with
 then the original Render continues automatically. Cancel also cancels the waiting render.
 **Output Options → Precompute Final Mattes** is optional, not a routine prerequisite.
 
-**[Download v1.0.0](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.0/SAM-Roto-for-Nuke-v1.0.0.zip)** · [日本語ガイド](QUICKSTART_JA.md)
+**[Download v1.0.3](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.3/SAM-Roto-for-Nuke-v1.0.3.zip)** · [日本語ガイド](QUICKSTART_JA.md)
 
 ## Update, recover and get help
 
@@ -116,5 +118,5 @@ Windows SAM 3 / 3.1 is unavailable; Linux is experimental and requires installer
 Farm / Nuke -t / -x does not perform automatic inference or Final preparation: deliver prepared caches/runtime
 or bake to standard nodes. Get Color and Ctrl+Shift+C custom hotkey are not included.
 
-[Detailed installation / recovery](INSTALLATION.md) · [Release notes](RELEASE_NOTES_1.0.0_EN.md) ·
+[Detailed installation / recovery](INSTALLATION.md) · [Release notes](RELEASE_NOTES_1.0.3_EN.md) ·
 [Screenshot captions / reuse](SCREENSHOTS.md) · [Licenses / notices](../THIRD_PARTY_NOTICES.md)

@@ -1,4 +1,4 @@
-# SAM Roto for Nuke v1.0.1
+# SAM Roto for Nuke v1.0.3
 
 Nuke内で使うPoint指定のAIロト。複数対象を指定してTrack／修正し、任意のViTMatteで輪郭を調整。
 MatteをそのままNuke alpha／Writeへ出力します。
@@ -55,8 +55,10 @@ GUI Render時は必要なFinal Matteを準備してから元のRenderを自動�
 **[最新Release／ダウンロード](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/latest)** · **[日本語インストール／使用ガイド](docs/QUICKSTART_JA.md)** ·
 **[English guide](docs/QUICKSTART_EN.md)**
 
-最新ReleaseのAssetsから版番号付きZIPを取得してください。現在の公開版は **[v1.0.1 ZIP](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.1/SAM-Roto-for-Nuke-v1.0.1.zip)** です。
-v1.0.1の実機Full Fresh Install・Tab／Properties・installer進捗UI・GPU受入は未検証です。
+最新ReleaseのAssetsから版番号付きZIPを取得してください。現在の公開版は **[v1.0.3 ZIP](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.3/SAM-Roto-for-Nuke-v1.0.3.zip)** です。
+v1.0.3では、大規模scriptの無関係なcomp操作を遅くしていたSAM Roto callbackを修正しました。
+実Source変更は対象Outputを失効させ、Write前にSourceを再検証します。v1.0.2候補のLinux installer／旧環境Repair修正も含みます。
+今回buildのGUI／GPU・大規模comp応答性・Linux Fresh Install／旧環境Repairは実機未検証です。
 
 Full SetupでPython／PyTorch、SAM2／2.1 Base+とViTMatteのモデルを準備し、以後はlocalで使います。
 更新は互換runtime／モデルとArtistデータを保持。ガイドには実v1.0.0のInstall／Finish画面も掲載しています。
@@ -66,7 +68,7 @@ Full SetupでPython／PyTorch、SAM2／2.1 Base+とViTMatteのモデルを準備
 - **Windows／Linux x86_64、NVIDIA CUDA GPU必須**。install／RepairにはInternetが必要です。
 - 標準setup中は20 GBの空き＋shot cache容量を確保。GPUメモリはshotにより変わります。
 - Nuke 15.2／16.0／16.1／17.xが互換対象です。全OS／Nuke／GPUの組み合わせで検証完了しているわけではありません。
-- v1.0.1はmacOS／CPUのみ／AMDのみ／Intelのみの推論に非対応。
+- v1.0.3はmacOS／CPUのみ／AMDのみ／Intelのみの推論に非対応。
 - Windows SAM3／3.1は利用不可。LinuxはExperimentalでinstaller Advancedと承認済みHF accessが必要です。
 - Farm／terminalは準備済みCache／runtimeか標準nodeへのベイクが必要です。自動推論は行いません。
 - Get Color、Ctrl+Shift+C custom hotkeyは未搭載です。
@@ -79,16 +81,15 @@ CUDA unknown errorの物理原因は未特定です。添付前に画像／log�
 ## ガイド・画像
 
 [日本語](docs/QUICKSTART_JA.md) · [English](docs/QUICKSTART_EN.md) ·
-[詳細install／復旧](docs/INSTALLATION_JA.md) · [v1.0.1 Release notes](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.0.1) ·
+[詳細install／復旧](docs/INSTALLATION_JA.md) · [v1.0.3 Release notes](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.0.3) ·
 [画像URL／キャプション](docs/SCREENSHOTS.md)
 
 ガイドには実際のv1.0.0 installer画面も保持しています。
 
 ## 整合性・ライセンス
 
-ZIP SHA-256: `6768e3f7ccb3e3b8d495bea66699719ade40c25f9532fd5d75a3833fe6fef2a1`
-Application source: `37e79965aa514d6be9ad06a8ee2cc13f3b82972f` · 39,352,403 bytes（v1.0.1 ZIP）。
+ZIP SHA-256: `9c5e63b0a7c21fd41e1d218390ae352caa5d466c3f4d257a9b9568f440e60912`
+Application source: `240df8b4e15054e7e1d0045a508e4f8f93da10db` · 39,367,328 bytes（v1.0.3 ZIP）。
 手動checksum比較は任意です。内部application／uv／source検証は維持します。
-ZIP内の一部文書に準備時のcandidate表記が残っていますが、[公開v1.0.1 Release](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.0.1)とchecksumで配布物を識別してください。
 本体オリジナルコードはMIT、第三者componentは各々の条件に従います。
 [LICENSE](LICENSE) · [第三者通知](THIRD_PARTY_NOTICES.md) · [固定依存一覧](docs/THIRD_PARTY_INVENTORY.md)

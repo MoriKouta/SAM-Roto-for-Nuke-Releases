@@ -1,5 +1,7 @@
 # SAM Roto：SelectからTrack、Matte調整まで
 
+現在の公開版は **v1.0.3** です。[変更点／検証範囲](RELEASE_NOTES_1.0.3_JA.md)。
+
 [English](QUICKSTART_EN.md)
 
 Nuke内でPointから対象を指定し、shotをTrack。任意のViTMatteで輪郭を比較・調整し、MatteをNukeへ出力します。
@@ -8,12 +10,12 @@ Nuke内でPointから対象を指定し、shotをTrack。任意のViTMatteで輪
 
 Windows／Linux x86_64と **NVIDIA CUDA GPU** が必要です。Nuke 15.2／16.0／16.1／17.xが互換対象です。
 全OS／Nuke／GPUの組み合わせで検証完了しているわけではありません。
-macOS、CPUのみ／AMDのみ／Intelのみの推論はv1.0.0では非対応です。
+macOS、CPUのみ／AMDのみ／Intelのみの推論はv1.0.3では非対応です。
 install／RepairにはInternetが必要です。標準setupは20 GBの空き＋shot cacheの容量を確保してください。
 
 ## 1. ダウンロードとFull Setup
 
-1. **[SAM-Roto-for-Nuke-v1.0.0.zip](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.0/SAM-Roto-for-Nuke-v1.0.0.zip)** を取得・展開します。
+1. **[SAM-Roto-for-Nuke-v1.0.3.zip](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.3/SAM-Roto-for-Nuke-v1.0.3.zip)** を取得・展開します。
 2. 作業を保存し、NukeとSAM Roto backendを終了してから、展開したfolderを開きます。
 3. Windowsは **install_windows.bat**、Linuxは **install_linux.sh** を実行します。
 4. **Install SAM Roto** を押し、**SAM Roto is ready** まで待って **Finish**。
@@ -89,7 +91,7 @@ Viewを **Cutout** にすると、現在のMatteで切り抜いた対象を黒�
 
 *Cutout — frame 24のcurrent-frame preview。Final mattesは9/24でpaused。Write完了画像ではありません。*
 
-操作画像は、v1.0.0表示の開発checkout（build 2f574ca）で撮影したユーザー提供例です。公開ZIP（a2545b9）のnative acceptance証拠ではありません。Cutoutはcurrent frameのpreviewで、全Final MatteやWriteの完了を示しません。
+操作画像は、v1.0.0表示の開発checkout（build 2f574ca）で撮影したユーザー提供例です。公開v1.0.0 ZIP（a2545b9）やv1.0.3のnative acceptance証拠ではありません。Cutoutはcurrent frameのpreviewで、全Final MatteやWriteの完了を示しません。
 
 ## 7. alphaとWriteへ
 
@@ -101,7 +103,7 @@ RGBはSourceを保持し、alphaは有効Objectを合成します。Object別出
 完了後は元のRenderを自動続行します。Cancelは待機中のRenderも中止します。
 **Output Options → Precompute Final Mattes** は任意の事前準備です。
 
-**[v1.0.0ダウンロード](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.0/SAM-Roto-for-Nuke-v1.0.0.zip)** · [English guide](QUICKSTART_EN.md)
+**[v1.0.3ダウンロード](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.3/SAM-Roto-for-Nuke-v1.0.3.zip)** · [English guide](QUICKSTART_EN.md)
 
 ## 更新・復旧・問い合わせ
 
@@ -115,5 +117,5 @@ Windows SAM3／3.1は利用不可。LinuxはExperimentalでinstaller Advancedと
 Farm／Nuke -t／-xで自動推論・Final準備は行いません。準備済みCache／runtimeを渡すか標準nodeへベイクします。
 Get ColorとCtrl+Shift+C custom hotkeyは未搭載です。
 
-[詳細install／復旧](INSTALLATION_JA.md) · [Release notes](RELEASE_NOTES_1.0.0_JA.md) ·
+[詳細install／復旧](INSTALLATION_JA.md) · [Release notes](RELEASE_NOTES_1.0.3_JA.md) ·
 [画像URL／キャプション](SCREENSHOTS.md) · [ライセンス／第三者通知](../THIRD_PARTY_NOTICES.md)
