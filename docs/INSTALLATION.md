@@ -4,16 +4,20 @@
 
 [日本語](INSTALLATION_JA.md) · [Product guide](../README.md)
 
-v1.0.3 is published. Use only the approved package from the
-[distribution Releases](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases).
+Current release: **[v1.1.0](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.1.0)**.
+Use **[SAM-Roto-for-Nuke-INSTALLER.zip](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/latest/download/SAM-Roto-for-Nuke-INSTALLER.zip)**.
+The fixed URL follows future latest releases.
 A repository source ZIP is not an installer.
 
 ## Install
 
 1. Download the release ZIP and extract it.
-2. Close Nuke and stop the SAM Roto backend; open the extracted SAM-Roto-for-Nuke folder.
+2. Save your work and close all Nuke sessions; open the extracted SAM-Roto-for-Nuke folder.
 3. Run install_windows.bat or install_linux.sh and choose **Install SAM Roto**.
-4. Wait for **SAM Roto is ready → Finish**, restart Nuke, select a source and choose **SAM Roto → Open SAM Roto**.
+4. Wait for **SAM Roto is ready → Finish**, restart Nuke, select a source, then **Tab → SAM Roto**.
+   Open the created Group's **Properties → Open Editor**.
+
+Allow approximately **10–30 minutes** for first Full Setup; network, disk and PC conditions can make it longer.
 
 Linux uses Tk or an available desktop dialog; without one it uses a terminal with the same stages.
 If the ZIP extractor removed executable permission, enable “Allow executing file as program” in Properties.
@@ -35,7 +39,8 @@ SAM 3 is excluded from standard setup. Linux **Advanced** can prepare experiment
 with explicitly entered, approved HF access; Windows entries are unavailable. Tokens are never logged.
 Adding this optional runtime later uses a journaled rebuild rather than changing a working venv in place;
 failure/Cancel restores that runtime. Ordinary compatible updates still reuse it without rebuilding.
-**Windows / Linux x86_64: Supported. macOS: Not supported in v1.0.3.**
+**Windows / Linux x86_64 are compatibility targets. macOS is unsupported in v1.1.0.**
+This does not mean every OS/Nuke/GPU combination has completed native validation.
 No additional render license is used by Source preparation.
 
 Allow 20 GB free for standard setup, or 40 GB with optional SAM 3, plus shot caches.
@@ -44,7 +49,21 @@ No universal shot cache size or VRAM requirement is claimed.
 
 ## Update
 
-Close Nuke/backend and run the new release's same installer. Do not uninstall first.
+### Updater-enabled Public installs
+
+After opening the SAM Window, Stable updates are checked at most once per 24 hours.
+**Support → Check for Updates** checks manually. Use **Update** to download/verify,
+save your work, then **Install & Restart Nuke**. Downloading does not replace running code.
+Finish Source preparation, Track, Render and other active work first. Cancelling Save or Nuke exit prevents installation.
+Another live Nuke or unknown process/backend ownership blocks the update; unrelated processes are not stopped.
+Start Nuke manually if its launch mode cannot be safely reused or the automatic restart fails.
+Runtime/models and artist cache, points, tracking, state and .nk files are outside the code update.
+
+### Installer update / Repair
+
+Older versions without the updater, or incompatible runtime/models, require the Installer above.
+Save your work, close all Nuke sessions and use the new release's **Update / Repair**. Do not uninstall first.
+The installer gracefully stops only a proven owned leftover backend; unknown listeners/processes block installation.
 The installer validates application bytes and updates only managed code in a compatible healthy install.
 Healthy runtime/models are reused without downloads. **Repair** restores missing models or rebuilds a
 broken installer-owned runtime with rollback; healthy model bytes and artist data remain.
@@ -81,7 +100,7 @@ ownership/backup review with support. Never delete .nuke as an uninstall operati
 | SAM 3 access denied | Linux experimental only: request approved model access and use installer Advanced. Do not send tokens in reports. Windows entries are unavailable. |
 | Cache unavailable | In Setup choose a writable Cache Location; Next to Nuke Script requires a saved .nk. Prepare missing frames; do not clear valid caches. |
 | Final preparation failed | Read the specific failure/cancel status, confirm the required Source/Raw cache remains accessible and retry after resolving it. Manual Precompute is an advanced option, not a routine prerequisite. |
-| Update says backend running | Finish work, close the Editor/Nuke and stop the backend using its normal controls. Do not kill unrelated processes. |
+| Update says backend running / another Nuke is active | Save work, close all Nuke sessions normally and retry. Ask support about unknown backends; do not kill unrelated processes. |
 | Linked path refused | Use a regular directory; symlink/reparse destinations are intentionally unsupported. |
 | Startup markers malformed | Preserve the startup file. Ask support to inspect the owned marker boundaries; installer does not guess or delete unrelated code. |
 
@@ -129,6 +148,10 @@ Repeat on each available **Nuke 15.2, 16.0, 16.1 and 17.x**, Windows and Linux:
    one-click Write and Cancel. Confirm no model download/setup prompt and correct alpha.
 6. Save/Open .nk; reopen/minimize/maximize; update a previous install and confirm cache/state/model reuse.
 
-Automated tests and historical development runs do not replace this v1.0.3 checklist.
+7. From an updater-enabled older Public install, check Download/Cancel/retry, Save Cancel, exit Cancel,
+   Install & Restart Nuke, restored version/script/data and refusal with another Nuke or unknown backend.
+
+Automated tests and historical development runs do not replace this v1.1.0 checklist.
+Native v1.1.0 GUI/GPU, Fresh Install/Repair and updater exit/restart/data retention remain unverified.
 Repeat installer Cancel/Retry and a compatible application update; verify no healthy runtime/models
 are downloaded again. Linux optional SAM 3/3.1 requires separate gated-access/native acceptance.

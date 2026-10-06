@@ -4,15 +4,19 @@
 
 [English](INSTALLATION.md) · [製品ガイド](../README_JA.md)
 
-v1.0.3公開版の配布先です。[配布Release](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases)
-で承認・公開されたpackageを使ってください。GitHubのsource ZIPはインストーラではありません。
+現在の公開版は **[v1.1.0](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.1.0)** です。
+**[SAM-Roto-for-Nuke-INSTALLER.zip](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/latest/download/SAM-Roto-for-Nuke-INSTALLER.zip)** を使ってください。
+固定URLは今後の最新版を取得します。GitHubのSource code ZIPはInstallerではありません。
 
 ## インストール
 
 1. Release ZIPを取得・展開します。
-2. Nuke／SAM Roto backendを終了し、展開したSAM-Roto-for-Nukeフォルダを開きます。
+2. 作業を保存し、すべてのNukeを終了して、展開したSAM-Roto-for-Nukeフォルダを開きます。
 3. install_windows.bat または install_linux.shを実行し、**Install SAM Roto** を押します。
-4. **SAM Roto is ready → Finish** のあとNukeを再起動し、Source選択 → **SAM Roto → Open SAM Roto**。
+4. **SAM Roto is ready → Finish** のあとNukeを再起動し、Source選択 → **Tab → SAM Roto**。
+   作成されたGroupの **Properties → Open Editor** からEditorを開きます。
+
+初回Full Setupの目安は **10〜30分**。回線・disk・PC環境によってさらに時間がかかります。
 
 Linuxは利用できるTk／desktop dialogを使い、なければ同じ工程を表示するterminalへfallbackします。
 実行権限がなければPropertiesで実行を許可し、file managerに選択肢があれば「端末で実行」を選びます。
@@ -32,7 +36,8 @@ SAM 2／2.1 Base+と固定revisionのViTMatteもinstaller内で取得します�
 tokenはlogに残しません。WindowsのSAM 3／3.1は利用不可です。
 あとからoptional runtimeを追加する場合は、既存venvを直接変更せずbackup付きで構築し、失敗・Cancel時は復元します。
 通常の互換code updateではruntimeを再構築しません。
-**Windows / Linux x86_64: Supported。macOS: Not supported in v1.0.3。**
+**Windows / Linux x86_64は互換対象。macOSはv1.1.0非対応です。**
+全OS／Nuke／GPUの組み合わせの実機検証完了を意味しません。
 Source準備で追加のrender licenseは使いません。
 
 標準setupは20 GB、SAM3選択時は40 GBの空きを確認します。shot cacheには別の容量が必要です。
@@ -40,7 +45,21 @@ Source準備で追加のrender licenseは使いません。
 
 ## 更新
 
-Nuke／backendを終了し、新Releaseの同じインストーラを実行します。事前削除は不要です。
+### In-App Updater対応のPublic install
+
+SAM Windowを開いた後、最大24時間に1回Stable更新を確認します。
+**Support → Check for Updates** で手動確認 → **Update** で取得・検証 →
+作業保存 → **Install & Restart Nuke**。取得中は稼働コードを置換しません。
+Source準備／Track／Renderなどの活動中は終了・更新できません。SaveやNuke終了をCancelするとinstallしません。
+別のNukeが活動中、またはprocess／backendの所有が不明なら更新を止め、無関係なprocessは終了しません。
+対応する起動方法を確認できない場合や再起動失敗時は、Nukeを手動起動してください。
+runtime／モデルとArtistのCache／Points／Tracking／State／.nkはコード更新の対象外です。
+
+### Installerでの更新・Repair
+
+旧版などUpdater非対応、またはruntime／モデル非互換なら上記Installerが必要です。
+作業を保存し、すべてのNukeを終了してから、新Releaseの **Update／Repair** を実行します。事前削除は不要です。
+所有を証明できる残存backendだけをinstallerが正常終了します。不明なlistener／processは安全のため更新を止めます。
 互換性のあるready installは検証済みの管理対象コードだけを更新します。
 Python／PyTorch／SAM source／モデル／Cache／Points／Tracking／設定／.nkは保持します。
 完了時に **updated successfully／Runtime/models preserved** を表示します。
@@ -76,7 +95,7 @@ runtime／モデル／管理外のArtistファイルは保持します。
 | SAM 3認証失敗 | Linux Experimentalのみ。access承認後installer Advancedを使用。tokenは報告に含めないでください。Windowsはloginだけでは利用できません。 |
 | Cache unavailable | Setupで書き込み可能な保存先を選択。Next to Nuke Scriptは.nk保存後に利用可。不足frameを準備し、有効Cacheは保持してください。 |
 | Final準備失敗 | 具体的な失敗／cancel表示とSource／Raw Cacheへのアクセスを確認。Manual Precomputeは通常操作の前提ではありません。 |
-| 更新時backend running | 作業を終え、Nuke／Editorを閉じbackendを通常の操作で停止。無関係なprocessは終了しないでください。 |
+| 更新時backend running／他のNukeが活動中 | 作業保存後、すべてのNukeを通常終了して再試行。不明なbackendはsupportへ相談し、無関係なprocessは終了しないでください。 |
 | Linked path refused | 通常のdirectoryを使用。symlink／reparse先は意図的に非対応です。 |
 | Startup marker不正 | startupファイルを保持してsupportへ相談。installerは推測で無関係なcodeを削除しません。 |
 
@@ -120,4 +139,8 @@ Cancelはinstaller-owned subprocess停止とrollback完了を待ちます。不�
 5. Global Adjustment／Object Override、任意のViTMatte、combined／object alpha、Write自動準備とCancel。
 6. .nkのSave/Open、Editor復元、旧installから更新しCache／state／モデル保持を確認。
 
-自動test・過去の開発版記録は今回のv1.0.3実機受入の代わりにはなりません。
+7. Updater対応の旧Public installでDownload／Cancel／再試行、Save Cancel、終了Cancel、
+   Install & Restart Nuke、再起動後のversion／script／データ保持、別Nuke／不明backendでの拒否を確認。
+
+自動test・過去の開発版記録は今回のv1.1.0実機受入の代わりにはなりません。
+v1.1.0のGUI／GPU、Fresh Install／Repair、Updaterの終了・再起動・データ保持は実機未検証です。
