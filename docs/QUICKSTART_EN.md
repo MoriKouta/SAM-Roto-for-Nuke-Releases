@@ -1,6 +1,6 @@
 # SAM Roto: select, track and refine your matte
 
-Current release: **v1.0.3**. [Changes / validation limits](RELEASE_NOTES_1.0.3_EN.md).
+Current release: **v1.1.0**. [Changes / validation limits](RELEASE_NOTES_1.1.0_EN.md).
 
 [日本語](QUICKSTART_JA.md)
 
@@ -11,15 +11,20 @@ compare optional ViTMatte edge refinement, then use the matte in Nuke.
 
 Windows / Linux x86_64 and an **NVIDIA CUDA-capable GPU** are required. Nuke 15.2 / 16.0 / 16.1 / 17.x
 are compatibility targets; validation is not complete for every OS/Nuke/GPU combination.
-macOS and CPU-only / AMD-only / Intel-only inference are not supported in v1.0.3.
+Native v1.1.0 GUI/GPU, Fresh Install/Repair and updater exit/restart/data retention remain unverified.
+macOS and CPU-only / AMD-only / Intel-only inference are not supported in v1.1.0.
 Internet is needed for installation/repair. Allow 20 GB free for standard setup, plus shot caches.
 
 ## 1. Download and run Full Setup
 
-1. Download **[SAM-Roto-for-Nuke-v1.0.3.zip](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.3/SAM-Roto-for-Nuke-v1.0.3.zip)** and extract it.
-2. Save your work, close Nuke and stop the SAM Roto backend before installing. Open the extracted folder.
+1. Download **[SAM-Roto-for-Nuke-INSTALLER.zip](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/latest/download/SAM-Roto-for-Nuke-INSTALLER.zip)** and extract it.
+2. Save your work and close all Nuke sessions before installing. Open the extracted folder.
 3. Windows: run **install_windows.bat**. Linux: run **install_linux.sh**.
 4. Click **Install SAM Roto**. Wait for **SAM Roto is ready**, then click **Finish**.
+
+Current release: **[v1.1.0](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.1.0)**. The fixed Installer URL follows future latest releases.
+GitHub Source code ZIPs are not the installer.
+Allow approximately **10–30 minutes** for first Full Setup; network, disk and PC conditions can make it longer.
 
 No system Python, Git, pip commands or startup editing. Full Setup downloads Python/PyTorch,
 SAM 2 / 2.1 Base+ and ViTMatte models; uv and SAM source archives are already in the ZIP.
@@ -34,7 +39,8 @@ Linux uses an available desktop UI or a terminal fallback; enable file execution
 
 ## 2. Open SAM Roto and prepare the Source
 
-Restart Nuke. Select the image/source node and choose **SAM Roto → Open SAM Roto**.
+Restart Nuke. Select the image/source node, then **Tab → SAM Roto**.
+Open the created SAM Roto Group's **Properties → Open Editor**.
 On first setup choose:
 
 | Setting | Start with |
@@ -92,7 +98,7 @@ This preview is useful before output; it does not mean every frame is ready for 
 
 *Cutout — frame 24 current-frame preview. Final mattes are paused at 9/24; this is not a completed Write.*
 
-User-provided operation examples captured in a development checkout displaying v1.0.0 (build 2f574ca). These are not native acceptance evidence for the published v1.0.0 ZIP (a2545b9) or v1.0.3. The Cutout shows the current frame, not all Final Mattes or a completed Write.
+User-provided operation examples captured in a development checkout displaying v1.0.0 (build 2f574ca). These are not native acceptance evidence for the published v1.0.0 ZIP (a2545b9) or v1.1.0. The Cutout shows the current frame, not all Final Mattes or a completed Write.
 
 ## 7. Use alpha and render with Write
 
@@ -104,12 +110,18 @@ Connect **Write** and render in the Nuke GUI. Required Final Mattes prepare with
 then the original Render continues automatically. Cancel also cancels the waiting render.
 **Output Options → Precompute Final Mattes** is optional, not a routine prerequisite.
 
-**[Download v1.0.3](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.3/SAM-Roto-for-Nuke-v1.0.3.zip)** · [日本語ガイド](QUICKSTART_JA.md)
+**[Download Latest Installer](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/latest/download/SAM-Roto-for-Nuke-INSTALLER.zip)** · [日本語ガイド](QUICKSTART_JA.md)
 
 ## Update, recover and get help
 
-- Update: save work, close Nuke/backend and run the new approved installer. Compatible runtime/models
-  and artist cache, points, tracking and state are retained; do not uninstall first.
+- Updater-enabled Public installs check Stable updates after opening the SAM Window, at most once per 24 hours.
+  **Support → Check for Updates** also checks manually. When an update is available, use **Update** to
+  download/verify, save your work, then **Install & Restart Nuke**. Finish Source preparation, Track and Render first.
+  Downloading does not replace running code. Cancelling Save or Nuke exit prevents installation.
+- Older versions without the updater, or incompatible runtime/models, require the Installer above.
+  Save work, close all Nuke sessions, then use installer **Update / Repair**. It gracefully stops only a
+  proven owned leftover backend; unknown listeners/processes block the update and unrelated processes are untouched.
+  Compatible runtime/models and artist cache, points, tracking and state are retained; do not uninstall first.
 - Incomplete components: use the same installer's **Repair**. Do not delete valid caches to fix setup.
 - CUDA/backend error: use **Support → Logs / Copy Diagnostics**. Review screenshots/logs for private information before sending.
 - Development checkouts keep **DEV Sync + Reload**. Do not install Public over your normal DEV profile.
@@ -118,5 +130,5 @@ Windows SAM 3 / 3.1 is unavailable; Linux is experimental and requires installer
 Farm / Nuke -t / -x does not perform automatic inference or Final preparation: deliver prepared caches/runtime
 or bake to standard nodes. Get Color and Ctrl+Shift+C custom hotkey are not included.
 
-[Detailed installation / recovery](INSTALLATION.md) · [Release notes](RELEASE_NOTES_1.0.3_EN.md) ·
+[Detailed installation / recovery](INSTALLATION.md) · [Release notes](RELEASE_NOTES_1.1.0_EN.md) ·
 [Screenshot captions / reuse](SCREENSHOTS.md) · [Licenses / notices](../THIRD_PARTY_NOTICES.md)
