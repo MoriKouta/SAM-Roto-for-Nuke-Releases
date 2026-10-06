@@ -1,11 +1,11 @@
-# SAM Roto for Nuke v1.0.3
+# SAM Roto for Nuke v1.1.0
 
 Point-guided AI roto inside Nuke. Select multiple subjects, track and correct their mattes,
 refine edges with optional ViTMatte, then use Nuke alpha and Write.
 
 ## Start in a few steps
 
-Download and extract the ZIP → save work and close Nuke/backend → **install_windows.bat / install_linux.sh**
+Download and extract the ZIP → save work and close Nuke → **install_windows.bat / install_linux.sh**
 → **Install SAM Roto → automatic Full Setup → Finish** → restart Nuke.
 Select a Source in the Node Graph → **Tab → search “SAM Roto” → SAM Roto**.
 A connected Group is created and its Properties open → **Open Editor → Prepare Source**.
@@ -52,14 +52,17 @@ User-provided operation examples captured in a development checkout displaying v
 
 ## Download / guides
 
-**[Latest release / download](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/latest)** · **[English install / usage guide](docs/QUICKSTART_EN.md)** ·
+**[Download Latest Installer](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/latest/download/SAM-Roto-for-Nuke-INSTALLER.zip)** · **[English install / usage guide](docs/QUICKSTART_EN.md)** ·
 **[日本語ガイド](docs/QUICKSTART_JA.md)**
 
-Download the versioned ZIP from the latest Release assets. Current published version: **[v1.0.3 ZIP](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.0.3/SAM-Roto-for-Nuke-v1.0.3.zip)**.
-v1.0.3 fixes SAM Roto callbacks that stalled unrelated comp edits in large scripts.
+Download **SAM-Roto-for-Nuke-INSTALLER.zip**. Current published version: **[v1.1.0](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.1.0)**;
+[versioned v1.1.0 ZIP](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/download/v1.1.0/SAM-Roto-for-Nuke-v1.1.0.zip) contains the same installer bytes.
+GitHub Source code archives are not the installer. The small Nukepedia helper only opens this official download in a browser.
+v1.1.0 includes the callback performance fixes, the v1.0.4 verified backend shutdown and the In-App Updater.
+After Nuke closes, the installer can gracefully stop a proven owned leftover backend; unknown listeners fail closed.
 Actual Source edits still invalidate affected output; Write revalidates Source before rendering.
 The v1.0.2 candidate's Linux installer/legacy Repair fixes are included. Native GUI/GPU,
-large-comp responsiveness, Linux Fresh Install and legacy Repair remain unverified for this build.
+large-comp responsiveness, Linux Fresh Install/Repair and native updater exit/restart/data retention remain unverified for this build.
 
 Full Setup prepares Python/PyTorch, SAM 2/2.1 Base+ and ViTMatte models; they run locally afterward.
 Compatible updates preserve runtime/models and artist data. The guide includes the actual v1.0.0 Install / Finish screens.
@@ -69,28 +72,30 @@ Compatible updates preserve runtime/models and artist data. The guide includes t
 - **Windows / Linux x86_64 · NVIDIA CUDA-capable GPU required.** Internet for install/repair.
 - Allow 20 GB free during standard setup, plus shot caches; GPU memory needs depend on the shot.
 - Nuke 15.2 / 16.0 / 16.1 / 17.x are compatibility targets. Validation is not complete for every OS/Nuke/GPU combination.
-- macOS, CPU-only / AMD-only / Intel-only inference are unsupported in v1.0.3.
+- macOS, CPU-only / AMD-only / Intel-only inference are unsupported in v1.1.0.
 - Windows SAM3/3.1 is unavailable; Linux is experimental and needs installer Advanced + approved HF access.
 - Farm/terminal renders require prepared caches/runtime or baked standard nodes. No automatic farm inference.
 - Get Color and Ctrl+Shift+C custom hotkey are not included.
 
 For a CUDA/backend problem, use **Support → Logs / Copy Diagnostics**. The physical cause of the reported
 SAM2.1 Add Point CUDA unknown error remains unconfirmed. Review attachments for confidential information.
-**Support → Check for Updates** is manual; it does not automatically install updates.
+Public installs check Stable updates shortly after opening the SAM Window, at most once per 24 hours.
+**Support → Check for Updates** also checks manually. **Update → Download/Verify → Install & Restart Nuke**
+requires explicit action and saving work; staging does not replace running code. Incompatible runtime/models require the installer.
 Development checkouts keep **DEV Sync + Reload**; do not install over your normal DEV profile.
 
 ## Guides / screenshots
 
 [English](docs/QUICKSTART_EN.md) · [日本語](docs/QUICKSTART_JA.md) ·
-[Detailed installation / recovery](docs/INSTALLATION.md) · [v1.0.3 release notes](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.0.3) ·
+[Detailed installation / recovery](docs/INSTALLATION.md) · [v1.1.0 release notes](https://github.com/MoriKouta/SAM-Roto-for-Nuke-Releases/releases/tag/v1.1.0) ·
 [Image URLs / captions](docs/SCREENSHOTS.md)
 
 The guides also retain actual v1.0.0 installer captures.
 
 ## Integrity / licenses
 
-ZIP SHA-256: `9c5e63b0a7c21fd41e1d218390ae352caa5d466c3f4d257a9b9568f440e60912`.
-Application source: `240df8b4e15054e7e1d0045a508e4f8f93da10db` · 39,367,328 bytes (v1.0.3 ZIP).
+ZIP SHA-256: `b09b67fbe34763e66b1fb5c895b6b70c36a5fc8bda862f54d23fe51b6d597a1a`.
+Application source: `d12e9a4e247154fac051ab86c0510afd0ce2b58f` · 39,397,225 bytes (v1.1.0 Installer ZIP).
 Manual checksum comparison is optional; internal application/uv/source checks remain mandatory.
 Original SAM Roto code is MIT; third-party components retain their own terms.
 [LICENSE](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md) · [Pinned inventory](docs/THIRD_PARTY_INVENTORY.md).
